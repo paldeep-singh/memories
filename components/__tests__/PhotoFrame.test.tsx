@@ -14,7 +14,7 @@ const COMPONENT_TEST_ID = "test-photo-frame";
 const IMAGE_TEST_ID = `${COMPONENT_TEST_ID}-image`;
 const LOADING_TEST_ID = `${COMPONENT_TEST_ID}-loading`;
 
-describe("<PhotoFrame />", () => {
+describe("PhotoFrame", () => {
   describe("while the image is loading", () => {
     beforeEach(() => {
       render(<PhotoFrame {...mockPhotoFrameProps} />);
