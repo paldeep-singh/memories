@@ -7,9 +7,6 @@ import { Album } from "./components/Album";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Open up App.tsx to start working on your app!
-      </Text>
       <Album name={albums[0].name} images={albums[0].images} />
       <StatusBar style="auto" />
       <TouchableHighlight style={styles.button} onPress={() => {}}>
