@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     gap: 10,
     backgroundColor: "white",
     padding: 10,
+    alignItems: "center",
   },
   text: {
     color: "black",
