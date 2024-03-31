@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react-native";
+import { Dimensions } from "react-native";
 
 import { IPhoto, PhotoFrame } from "../PhotoFrame";
-import { Dimensions } from "react-native";
 
 const mockPhotoFrameProps: IPhoto = {
   date: "2021-01-03",
