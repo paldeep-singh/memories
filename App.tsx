@@ -1,17 +1,17 @@
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 
 import { albums } from "./assets/albums.json";
 import { Album } from "./components/Album";
+import { Showcase } from "./components/Showcase";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Album name={albums[0].name} images={albums[0].images} />
       <StatusBar style="auto" />
-      <TouchableHighlight style={styles.button} onPress={() => {}}>
-        <Text style={styles.buttonText}>Start slideshow</Text>
-      </TouchableHighlight>
+      <Showcase images={albums[0].images} name={albums[0].name} />
     </View>
   );
 }
