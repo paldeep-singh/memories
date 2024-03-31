@@ -75,12 +75,13 @@ describe("PhotoFrame", () => {
       expect(screen.queryByTestId(LOADING_TEST_ID)).toBeNull();
     });
 
-    it("sets the dimensions of the image", () => {
+    it("sets the height, width and aspect ratio of the image", () => {
       const image = screen.getByTestId(IMAGE_TEST_ID);
 
       expect(image.props.style).toEqual({
-        width: 80,
-        height: 80,
+        aspectRatio: 1,
+        height: undefined,
+        width: "90%",
       });
     });
   });

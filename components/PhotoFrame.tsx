@@ -6,6 +6,7 @@ import {
   useWindowDimensions,
   Text,
   ActivityIndicator,
+  DimensionValue,
 } from "react-native";
 
 export interface IPhoto {
@@ -13,6 +14,8 @@ export interface IPhoto {
   url: string;
   caption: string;
   testID?: string;
+  width?: DimensionValue;
+  height?: DimensionValue;
 }
 
 const styles = StyleSheet.create({
@@ -48,39 +51,41 @@ export const PhotoFrame = ({
   url,
   caption,
   testID,
+  width,
+  height,
 }: IPhoto): JSX.Element => {
   const [loading, setLoading] = useState(true);
 
-  const { width: ScreenWidth } = useWindowDimensions();
-
   const [dimensions, setDimensions] = useState(styles.imageLoading);
 
-  const handleOnLoad = async ({
-    width,
-    height,
-  }: {
-    width: number;
-    height: number;
-  }) => {
-    const imageWidth = ScreenWidth * 0.8;
-    setDimensions({
-      width: imageWidth,
-      height: (imageWidth / width) * height,
-    });
-    setLoading(false);
-  };
-
   return (
-    <View testID={testID} style={styles.container}>
+    <View
+      testID={testID}
+      style={[
+        styles.container,
+        {
+          width,
+          height,
+        },
+      ]}
+    >
       <Image
         testID={`${testID}-image`}
         src={url}
-        style={dimensions}
+        style={{
+          width: "90%",
+          height: undefined,
+          aspectRatio: dimensions.width / dimensions.height,
+        }}
         onLoad={({
           nativeEvent: {
             source: { width, height },
           },
-        }) => handleOnLoad({ width, height })}
+        }) => {
+          setDimensions({ width, height });
+          setLoading(false);
+        }}
+        resizeMode="contain"
       />
       {!loading && (
         <Text style={styles.frameText}>
