@@ -12,6 +12,7 @@ const mockPhotoFrameProps: IPhoto = {
 
 const COMPONENT_TEST_ID = "test-photo-frame";
 const IMAGE_TEST_ID = `${COMPONENT_TEST_ID}-image`;
+const LOADING_TEST_ID = `${COMPONENT_TEST_ID}-loading`;
 
 describe("<PhotoFrame />", () => {
   describe("while the image is loading", () => {
@@ -25,8 +26,8 @@ describe("<PhotoFrame />", () => {
       expect(image.props.src).toBe(mockPhotoFrameProps.url);
     });
 
-    it("renders the loading text", () => {
-      expect(screen.getByText("Loading...")).toBeTruthy();
+    it("renders the loading indicator", () => {
+      screen.getByTestId(LOADING_TEST_ID);
     });
 
     it("does not render the date and caption", () => {
@@ -70,8 +71,8 @@ describe("<PhotoFrame />", () => {
       ).toBeTruthy();
     });
 
-    it("does not render the loading text", () => {
-      expect(screen.queryByText("Loading...")).toBeNull();
+    it("does not render the loading indicator", () => {
+      expect(screen.queryByTestId(LOADING_TEST_ID)).toBeNull();
     });
 
     it("sets the dimensions of the image", () => {

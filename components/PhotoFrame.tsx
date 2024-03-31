@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   Text,
+  ActivityIndicator,
 } from "react-native";
 
 export interface IPhoto {
@@ -27,8 +28,17 @@ const styles = StyleSheet.create({
     color: "black",
   },
   imageLoading: {
-    width: 0,
-    height: 0,
+    width: 50,
+    height: 50,
+  },
+  loading: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
@@ -42,10 +52,7 @@ export const PhotoFrame = ({
 
   const { width: ScreenWidth } = useWindowDimensions();
 
-  const [dimensions, setDimensions] = useState({
-    width: 10,
-    height: 10,
-  });
+  const [dimensions, setDimensions] = useState(styles.imageLoading);
 
   const handleOnLoad = async ({
     width,
@@ -63,10 +70,9 @@ export const PhotoFrame = ({
   };
 
   return (
-    <View style={styles.container}>
-      {loading && <Text style={styles.text}>Loading...</Text>}
+    <View testID={testID} style={styles.container}>
       <Image
-        testID={testID}
+        testID={`${testID}-image`}
         src={url}
         style={dimensions}
         onLoad={({
@@ -79,6 +85,15 @@ export const PhotoFrame = ({
         <Text style={styles.frameText}>
           {date}: {caption}
         </Text>
+      )}
+
+      {loading && (
+        <View style={styles.loading}>
+          <ActivityIndicator
+            style={styles.loading}
+            testID={`${testID}-loading`}
+          />
+        </View>
       )}
     </View>
   );
