@@ -3,7 +3,6 @@ import {
   Image,
   View,
   StyleSheet,
-  useWindowDimensions,
   Text,
   ActivityIndicator,
   DimensionValue,

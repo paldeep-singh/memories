@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { albums } from "./assets/albums.json";
 import { Album } from "./components/Album";
