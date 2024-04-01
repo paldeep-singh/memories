@@ -125,25 +125,27 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
   });
 
   const handleOnClose = () => {
-    Animated.parallel(
-      rotationProgress.map((progress) =>
-        Animated.timing(progress, {
-          toValue: 0,
-          duration: 100,
-          useNativeDriver: false
-        })
-      )
-    ).start(() => {
-      setStartShowcase(false);
+    Animated.sequence([
+      Animated.parallel(
+        rotationProgress.map((progress) =>
+          Animated.timing(progress, {
+            toValue: 0,
+            duration: 100,
+            useNativeDriver: false
+          })
+        )
+      ),
       Animated.parallel(
         slideProgress.map((progress) =>
           Animated.timing(progress, {
             toValue: -1,
-            duration: 0,
+            duration: 500,
             useNativeDriver: false
           })
         )
-      ).start();
+      )
+    ]).start(() => {
+      setStartShowcase(false);
     });
   };
 
