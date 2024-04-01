@@ -88,7 +88,7 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
   const imageRotation = rotationProgress.map((value) =>
     value.interpolate({
       inputRange: [-1, 1],
-      outputRange: ["-30deg", "30deg"]
+      outputRange: ["-25deg", "25deg"]
     })
   );
 
