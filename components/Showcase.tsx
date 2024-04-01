@@ -111,12 +111,14 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
             Animated.timing(progress, {
               toValue: index === 0 ? 1 : 1 - index * (1 / images.length),
               duration: showcaseDuration,
-              useNativeDriver: false
+              useNativeDriver: false,
+              easing: Easing.in(Easing.bezier(0.03, 0.93, 0.71, 0.99))
             }),
             Animated.timing(rotationProgress[index], {
               toValue: even ? rotateValue : -rotateValue,
-              duration: showcaseDuration,
-              useNativeDriver: false
+              duration: showcaseDuration / 2,
+              useNativeDriver: false,
+              easing: Easing.in(Easing.bezier(0.03, 0.93, 0.71, 0.99))
             })
           ]);
         })
@@ -140,8 +142,7 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
           Animated.timing(progress, {
             toValue: -1,
             duration: 0,
-            useNativeDriver: false,
-            easing: Easing.out(Easing.bezier(0.03, 0.93, 0.71, 0.99))
+            useNativeDriver: false
           })
         )
       ).start();
