@@ -120,7 +120,8 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
           Animated.timing(progress, {
             toValue: -1,
             duration: 0,
-            useNativeDriver: false
+            useNativeDriver: false,
+            easing: Easing.out(Easing.bezier(0.03, 0.93, 0.71, 0.99))
           })
         )
       ).start();
