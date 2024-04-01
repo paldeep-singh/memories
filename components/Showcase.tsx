@@ -7,7 +7,10 @@ import {
   ActivityIndicator,
   Animated,
   useWindowDimensions,
-  Text
+  Text,
+  TextInput,
+  KeyboardAvoidingView,
+  Easing
 } from "react-native";
 
 import { IAlbum } from "./Album";
@@ -44,6 +47,18 @@ const styles = StyleSheet.create({
   loadingContainer: {
     flexDirection: "row",
     gap: 10
+  },
+  durationInput: {
+    backgroundColor: colours["Baby powder"],
+    color: colours["Rich black"],
+    width: "50%",
+    textAlign: "center"
+  },
+  modalButtonContainer: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10
   }
 });
 
@@ -51,6 +66,8 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
   const [startShowcase, setStartShowcase] = useState(false);
   const [loading, setLoading] = useState(true);
   const { height: screenHeight } = useWindowDimensions();
+  const [showcaseDuration, setShowcaseDuration] = useState(1000);
+
   const slideProgress = useRef(
     images.map(() => new Animated.Value(-1))
   ).current;
@@ -90,12 +107,12 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
           return Animated.parallel([
             Animated.timing(progress, {
               toValue: index === 0 ? 1 : 1 - index * (1 / images.length),
-              duration: 1000,
+              duration: showcaseDuration,
               useNativeDriver: false
             }),
             Animated.timing(rotationProgress[index], {
               toValue: even ? rotateValue : -rotateValue,
-              duration: 1000,
+              duration: showcaseDuration,
               useNativeDriver: false
             })
           ]);
@@ -136,7 +153,21 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
           <ActivityIndicator color={colours["Misty rose"]} />
         </View>
       ) : (
-        <Button text="Start showcase" onPress={() => setStartShowcase(true)} />
+        <KeyboardAvoidingView
+          style={styles.modalButtonContainer}
+          behavior="padding"
+        >
+          <TextInput
+            inputMode="numeric"
+            defaultValue="1000"
+            style={styles.durationInput}
+            onChangeText={(text) => setShowcaseDuration(parseInt(text, 10))}
+          />
+          <Button
+            text="Start showcase"
+            onPress={() => setStartShowcase(true)}
+          />
+        </KeyboardAvoidingView>
       )}
       <Modal visible={startShowcase} animationType="slide">
         <View style={styles.container}>
