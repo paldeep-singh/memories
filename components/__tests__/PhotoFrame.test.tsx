@@ -1,3 +1,4 @@
+import {faker} from '@faker-js/faker'
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import { Dimensions } from "react-native";
 
@@ -5,7 +6,7 @@ import { IPhoto, PhotoFrame } from "../PhotoFrame";
 
 const mockPhotoFrameProps: IPhoto = {
   date: "2021-01-03",
-  url: "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/2+012.jpg",
+  url: faker.image.url(),
   caption: "Somewhere in Canada 2",
   testID: "test-photo-frame",
 };

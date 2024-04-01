@@ -6,12 +6,12 @@ const mockAlbumProps: IAlbum = {
   name: "The Album",
   images: [
     {
-      url: "https://via.placeholder.com/150",
+      url: faker.image.url(),
       caption: "The first image",
       date: "2021-10-01",
     },
     {
-      url: "https://via.placeholder.com/150",
+      url: faker.image.url(),
       caption: "The second image",
       date: "2021-10-02",
     },
