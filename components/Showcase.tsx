@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     backgroundColor: colours["Misty rose"]
   },
-  modalContainer: {
+  photoFrameContainer: {
     position: "absolute",
     width: "100%",
     padding: 20,
@@ -179,7 +179,7 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
             <Animated.View
               key={`slideshow-image-${index}`}
               style={[
-                styles.modalContainer,
+                styles.photoFrameContainer,
                 {
                   top: imageTop[index],
                   zIndex: index,
