@@ -1,6 +1,6 @@
+import { Image } from "expo-image";
 import { JSX, useState } from "react";
 import {
-  Image,
   View,
   StyleSheet,
   Text,
@@ -70,21 +70,17 @@ export const PhotoFrame = ({
     >
       <Image
         testID={`${testID}-image`}
-        src={url}
+        source={url}
         style={{
           width: "90%",
           height: undefined,
           aspectRatio: dimensions.width / dimensions.height,
         }}
-        onLoad={({
-          nativeEvent: {
-            source: { width, height },
-          },
-        }) => {
+        onLoad={({ source: { width, height } }) => {
           setDimensions({ width, height });
           setLoading(false);
         }}
-        resizeMode="contain"
+        contentFit="contain"
       />
       {!loading && (
         <Text style={styles.frameText}>

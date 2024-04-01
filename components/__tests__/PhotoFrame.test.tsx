@@ -23,7 +23,7 @@ describe("PhotoFrame", () => {
     it("renders the image component with the provided url", () => {
       const image = screen.getByTestId(IMAGE_TEST_ID);
 
-      expect(image.props.src).toBe(mockPhotoFrameProps.url);
+      expect(image.props.source).toEqual([{ uri: mockPhotoFrameProps.url }]);
     });
 
     it("renders the loading indicator", () => {
@@ -50,7 +50,7 @@ describe("PhotoFrame", () => {
       fireEvent(screen.getByTestId(IMAGE_TEST_ID), "onLoad", {
         nativeEvent: {
           source: {
-            width: 100,
+            width: 200,
             height: 100,
           },
         },
@@ -60,7 +60,7 @@ describe("PhotoFrame", () => {
     it("renders the image component with the provided url", () => {
       const image = screen.getByTestId(IMAGE_TEST_ID);
 
-      expect(image.props.src).toBe(mockPhotoFrameProps.url);
+      expect(image.props.source).toEqual([{ uri: mockPhotoFrameProps.url }]);
     });
 
     it("renders the date and caption", () => {
@@ -79,7 +79,7 @@ describe("PhotoFrame", () => {
       const image = screen.getByTestId(IMAGE_TEST_ID);
 
       expect(image.props.style).toEqual({
-        aspectRatio: 1,
+        aspectRatio: 2,
         height: undefined,
         width: "90%",
       });
