@@ -23,28 +23,36 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     textAlign: "center",
-    color: colours["Baby powder"]
+    color: colours["Baby powder"],
+    backgroundColor: colours["Tyrian purple"],
+    width: "100%",
+    padding: 10
   }
 });
 
 export const Album = ({ name, images }: IAlbum): JSX.Element => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{name}</Text>
       <FlashList
-        data={images}
-        renderItem={({ item: image }) => (
-          <View style={styles.itemsContainer}>
-            <PhotoFrame
-              date={image.date}
-              url={image.url}
-              caption={image.caption}
-              testID={image.testID}
-            />
-          </View>
-        )}
+        data={[name, ...images]}
+        renderItem={({ item }) => {
+          if (typeof item === "string") {
+            return <Text style={styles.title}>{item}</Text>;
+          }
+          return (
+            <View style={styles.itemsContainer}>
+              <PhotoFrame
+                date={item.date}
+                url={item.url}
+                caption={item.caption}
+                testID={item.testID}
+              />
+            </View>
+          );
+        }}
         estimatedItemSize={70}
         testID="album-list"
+        stickyHeaderIndices={[0]}
       />
     </View>
   );
