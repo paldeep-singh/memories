@@ -3,7 +3,7 @@ import { JSX } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import { IPhoto, PhotoFrame } from "./PhotoFrame";
-
+import { colours } from "../colours/colours";
 export interface IAlbum {
   name: string;
   images: IPhoto[];
@@ -14,18 +14,17 @@ const styles = StyleSheet.create({
     gap: 10,
     width: "100%",
     height: "80%",
-    alignContent: "center",
-    backgroundColor: "transparent",
+    alignContent: "center"
   },
   itemsContainer: {
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20
   },
   title: {
     fontSize: 20,
     textAlign: "center",
-    color: "white",
-  },
+    color: colours["Baby powder"]
+  }
 });
 
 export const Album = ({ name, images }: IAlbum): JSX.Element => {

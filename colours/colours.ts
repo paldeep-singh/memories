@@ -9,5 +9,6 @@ export const colours = {
   "Baby powder": "#fdfffc",
   "Orange (web)": "#faa916",
   "Payne's grey": "#475B63",
-  Gunmetal: "#2C3531"
+  Gunmetal: "#2C3531",
+  "Rich black": "#0B171E"
 };

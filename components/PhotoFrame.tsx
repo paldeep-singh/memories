@@ -5,8 +5,10 @@ import {
   StyleSheet,
   Text,
   ActivityIndicator,
-  DimensionValue,
+  DimensionValue
 } from "react-native";
+
+import { colours } from "../colours/colours";
 
 export interface IPhoto {
   date: string;
@@ -20,19 +22,16 @@ export interface IPhoto {
 const styles = StyleSheet.create({
   container: {
     gap: 10,
-    backgroundColor: "white",
+    backgroundColor: colours["Baby powder"],
     padding: 10,
-    alignItems: "center",
+    alignItems: "center"
   },
   text: {
-    color: "black",
-  },
-  frameText: {
-    color: "black",
+    color: colours["Rich black"]
   },
   imageLoading: {
     width: 50,
-    height: 50,
+    height: 50
   },
   loading: {
     position: "absolute",
@@ -41,8 +40,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     justifyContent: "center",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 });
 
 export const PhotoFrame = ({
@@ -51,7 +50,7 @@ export const PhotoFrame = ({
   caption,
   testID,
   width,
-  height,
+  height
 }: IPhoto): JSX.Element => {
   const [loading, setLoading] = useState(true);
 
@@ -64,8 +63,8 @@ export const PhotoFrame = ({
         styles.container,
         {
           width,
-          height,
-        },
+          height
+        }
       ]}
     >
       <Image
@@ -74,7 +73,7 @@ export const PhotoFrame = ({
         style={{
           width: "90%",
           height: undefined,
-          aspectRatio: dimensions.width / dimensions.height,
+          aspectRatio: dimensions.width / dimensions.height
         }}
         onLoad={({ source: { width, height } }) => {
           setDimensions({ width, height });
@@ -83,7 +82,7 @@ export const PhotoFrame = ({
         contentFit="contain"
       />
       {!loading && (
-        <Text style={styles.frameText}>
+        <Text style={styles.text}>
           {date}: {caption}
         </Text>
       )}
