@@ -6,7 +6,8 @@ import {
   View,
   ActivityIndicator,
   Animated,
-  useWindowDimensions
+  useWindowDimensions,
+  Text
 } from "react-native";
 
 import { IAlbum } from "./Album";
@@ -36,6 +37,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "transparent",
     alignItems: "center"
+  },
+  loadingText: {
+    color: colours["Baby powder"]
+  },
+  loadingContainer: {
+    flexDirection: "row",
+    gap: 10
   }
 });
 
@@ -121,13 +129,16 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
 
   return (
     <>
-      {!loading && (
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>Showcase loading...</Text>
+          <ActivityIndicator color={colours["Misty rose"]} />
+        </View>
+      ) : (
         <Button text="Start showcase" onPress={() => setStartShowcase(true)} />
       )}
       <Modal visible={startShowcase} animationType="slide">
         <View style={styles.container}>
-          {loading && <ActivityIndicator size="large" color="#000000" />}
-
           {!loading &&
             images.map(({ url, caption, date }, index) => (
               <Animated.View
