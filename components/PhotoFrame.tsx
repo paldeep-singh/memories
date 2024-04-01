@@ -92,6 +92,7 @@ export const PhotoFrame = ({
           <ActivityIndicator
             style={styles.loading}
             testID={`${testID}-loading`}
+            color={colours["Charcoal"]}
           />
         </View>
       )}
