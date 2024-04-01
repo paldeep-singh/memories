@@ -10,7 +10,8 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
-  Easing
+  Easing,
+  SafeAreaView
 } from "react-native";
 
 import { IAlbum } from "./Album";
@@ -23,9 +24,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colours["Tropical indigo"],
     alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
-    paddingTop: 50
+    justifyContent: "flex-start",
+    gap: 20
   },
   closeButton: {
     position: "absolute",
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
     flex: 1,
-    backgroundColor: "transparent",
     alignItems: "center"
   },
   loadingText: {
@@ -59,6 +58,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 10
+  },
+  headerText: {
+    color: colours["Rich black"],
+    fontSize: 20
   }
 });
 
@@ -170,36 +173,36 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
         </KeyboardAvoidingView>
       )}
       <Modal visible={startShowcase} animationType="slide">
-        <View style={styles.container}>
-          {!loading &&
-            images.map(({ url, caption, date }, index) => (
-              <Animated.View
-                key={`slideshow-image-${index}`}
-                style={[
-                  styles.modalContainer,
-                  {
-                    top: imageTop[index],
-                    zIndex: index,
-                    transform: [{ rotate: imageRotation[index] }]
-                  }
-                ]}
-              >
-                <PhotoFrame
-                  key={url}
-                  url={url}
-                  caption={caption}
-                  date={date}
-                  width="80%"
-                />
-              </Animated.View>
-            ))}
+        <SafeAreaView style={styles.container}>
+          <Text style={styles.headerText}>{name}</Text>
+          {images.map(({ url, caption, date }, index) => (
+            <Animated.View
+              key={`slideshow-image-${index}`}
+              style={[
+                styles.modalContainer,
+                {
+                  top: imageTop[index],
+                  zIndex: index,
+                  transform: [{ rotate: imageRotation[index] }]
+                }
+              ]}
+            >
+              <PhotoFrame
+                key={url}
+                url={url}
+                caption={caption}
+                date={date}
+                width="80%"
+              />
+            </Animated.View>
+          ))}
 
           <Button
             text="Close"
             onPress={handleOnClose}
             containerStyle={styles.closeButton}
           />
-        </View>
+        </SafeAreaView>
       </Modal>
     </>
   );
