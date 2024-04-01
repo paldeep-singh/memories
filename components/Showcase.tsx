@@ -1,3 +1,5 @@
+import { Image } from "expo-image";
+import { useEffect, useState, JSX, useRef } from "react";
 import {
   Modal,
   StyleSheet,
@@ -9,10 +11,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 
-import { Image } from "expo-image";
-
-import { Album, IAlbum } from "./Album";
-import { useEffect, useState, JSX, useRef } from "react";
+import { IAlbum } from "./Album";
 import { PhotoFrame } from "./PhotoFrame";
 
 const styles = StyleSheet.create({
