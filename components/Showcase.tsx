@@ -65,12 +65,43 @@ const styles = StyleSheet.create({
   }
 });
 
-export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
-  const [startShowcase, setStartShowcase] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const { height: screenHeight } = useWindowDimensions();
-  const [showcaseDuration, setShowcaseDuration] = useState(1000);
+const LoadingIndicator = (): JSX.Element => (
+  <View style={styles.loadingContainer}>
+    <Text style={styles.loadingText}>Showcase loading...</Text>
+    <ActivityIndicator color={colours["Misty rose"]} />
+  </View>
+);
 
+const ShowcaseControls = ({
+  startShowcase,
+  setShowcaseDuration
+}: {
+  startShowcase: () => void;
+  setShowcaseDuration: (duration: number) => void;
+}): JSX.Element => (
+  <KeyboardAvoidingView style={styles.modalButtonContainer} behavior="padding">
+    <TextInput
+      inputMode="numeric"
+      defaultValue="1000"
+      style={styles.durationInput}
+      onChangeText={(text) => setShowcaseDuration(parseInt(text, 10))}
+    />
+    <Button text="Start showcase" onPress={startShowcase} />
+  </KeyboardAvoidingView>
+);
+
+interface IShowcaseContent extends IAlbum {
+  dismiss: () => void;
+  duration: number;
+}
+
+const ShowcaseContent = ({
+  images,
+  name,
+  dismiss,
+  duration
+}: IShowcaseContent): JSX.Element => {
+  const { height: screenHeight } = useWindowDimensions();
   const slideProgress = useRef(
     images.map(() => new Animated.Value(-1))
   ).current;
@@ -92,14 +123,9 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
     })
   );
 
+  // Animate images sliding in from bottom
   useEffect(() => {
-    Promise.all(images.map(({ url }) => Image.prefetch(url))).then(() => {
-      setLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!loading && startShowcase) {
+    setTimeout(() => {
       Animated.sequence(
         slideProgress.map((progress, index) => {
           const even = index % 2 === 0;
@@ -108,23 +134,24 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
           return Animated.parallel([
             Animated.timing(progress, {
               toValue: index === 0 ? 1 : 1 - index * (1 / images.length),
-              duration: showcaseDuration,
+              duration,
               useNativeDriver: false,
-              easing: Easing.in(Easing.bezier(0.03, 0.93, 0.71, 0.99))
+              easing: Easing.in(Easing.bezier(0.03, 0.93, 0.71, 0.99)) // Slow down animation towards end
             }),
             Animated.timing(rotationProgress[index], {
               toValue: even ? rotateValue : -rotateValue,
-              duration: showcaseDuration / 2,
+              duration: duration / 2,
               useNativeDriver: false,
-              easing: Easing.in(Easing.bezier(0.03, 0.93, 0.71, 0.99))
+              easing: Easing.in(Easing.bezier(0.03, 0.93, 0.71, 0.99)) // Slow down animation towards end
             })
           ]);
         })
       ).start();
-    }
+    }, 300); // Slight delay to allow modal to open before animation starts
   });
 
-  const handleOnClose = () => {
+  const onDismiss = () => {
+    // Straighten images and slide them out
     Animated.sequence([
       Animated.parallel(
         rotationProgress.map((progress) =>
@@ -145,63 +172,71 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
         )
       )
     ]).start(() => {
-      setStartShowcase(false);
+      dismiss();
     });
   };
 
   return (
     <>
-      {loading ? (
-        <View style={styles.loadingContainer}>
-          <Text style={styles.loadingText}>Showcase loading...</Text>
-          <ActivityIndicator color={colours["Misty rose"]} />
-        </View>
-      ) : (
-        <KeyboardAvoidingView
-          style={styles.modalButtonContainer}
-          behavior="padding"
+      <Text style={styles.headerText}>{name}</Text>
+      {images.map(({ url, caption, date }, index) => (
+        <Animated.View
+          key={`slideshow-image-${index}`}
+          style={[
+            styles.photoFrameContainer,
+            {
+              top: imageTop[index],
+              zIndex: index,
+              transform: [{ rotate: imageRotation[index] }]
+            }
+          ]}
         >
-          <TextInput
-            inputMode="numeric"
-            defaultValue="1000"
-            style={styles.durationInput}
-            onChangeText={(text) => setShowcaseDuration(parseInt(text, 10))}
+          <PhotoFrame
+            key={url}
+            url={url}
+            caption={caption}
+            date={date}
+            width="80%"
           />
-          <Button
-            text="Start showcase"
-            onPress={() => setStartShowcase(true)}
-          />
-        </KeyboardAvoidingView>
+        </Animated.View>
+      ))}
+      <Button
+        text="Close"
+        onPress={onDismiss}
+        containerStyle={styles.closeButton}
+      />
+    </>
+  );
+};
+
+export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
+  const [startShowcase, setStartShowcase] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [showcaseDuration, setShowcaseDuration] = useState(1000);
+
+  useEffect(() => {
+    Promise.all(images.map(({ url }) => Image.prefetch(url))).then(() => {
+      setLoading(false);
+    });
+  }, []);
+
+  return (
+    <>
+      {loading ? (
+        <LoadingIndicator />
+      ) : (
+        <ShowcaseControls
+          startShowcase={() => setStartShowcase(true)}
+          setShowcaseDuration={setShowcaseDuration}
+        />
       )}
       <Modal visible={startShowcase} animationType="slide">
         <SafeAreaView style={styles.container}>
-          <Text style={styles.headerText}>{name}</Text>
-          {images.map(({ url, caption, date }, index) => (
-            <Animated.View
-              key={`slideshow-image-${index}`}
-              style={[
-                styles.photoFrameContainer,
-                {
-                  top: imageTop[index],
-                  zIndex: index,
-                  transform: [{ rotate: imageRotation[index] }]
-                }
-              ]}
-            >
-              <PhotoFrame
-                key={url}
-                url={url}
-                caption={caption}
-                date={date}
-                width="80%"
-              />
-            </Animated.View>
-          ))}
-
-          <Button
-            text="Close"
-            onPress={handleOnClose}
-            containerStyle={styles.closeButton}
+          <ShowcaseContent
+            images={images}
+            name={name}
+            dismiss={() => setStartShowcase(false)}
+            duration={showcaseDuration}
           />
         </SafeAreaView>
       </Modal>
