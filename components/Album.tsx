@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
   container: {
     gap: 10,
     width: "100%",
-    height: "80%",
-    alignContent: "center"
+    alignContent: "center",
+    flexGrow: 1
   },
   itemsContainer: {
     paddingVertical: 10,
