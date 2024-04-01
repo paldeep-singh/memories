@@ -82,9 +82,14 @@ const ShowcaseControls = ({
   <KeyboardAvoidingView style={styles.modalButtonContainer} behavior="padding">
     <TextInput
       inputMode="numeric"
-      defaultValue="1000"
+      placeholder="Delay (ms), default: 1000"
+      placeholderTextColor={colours["Payne's grey"]}
       style={styles.durationInput}
-      onChangeText={(text) => setShowcaseDuration(parseInt(text, 10))}
+      onChangeText={(text) =>
+        !text
+          ? setShowcaseDuration(1000)
+          : setShowcaseDuration(parseInt(text, 10))
+      }
     />
     <Button text="Start showcase" onPress={startShowcase} />
   </KeyboardAvoidingView>
