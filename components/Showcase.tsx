@@ -93,9 +93,7 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
   );
 
   useEffect(() => {
-    console.log("prefetching images");
     Promise.all(images.map(({ url }) => Image.prefetch(url))).then(() => {
-      console.log("images prefetched");
       setLoading(false);
     });
   }, []);
