@@ -3,45 +3,44 @@ import { useEffect, useState, JSX, useRef } from "react";
 import {
   Modal,
   StyleSheet,
-  TouchableHighlight,
   View,
-  Text,
   ActivityIndicator,
   Animated,
-  useWindowDimensions,
+  useWindowDimensions
 } from "react-native";
 
 import { IAlbum } from "./Album";
+import { Button } from "./Button";
 import { PhotoFrame } from "./PhotoFrame";
+import { colours } from "../colours/colours";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "maroon",
+    backgroundColor: colours["Tropical indigo"],
     alignItems: "center",
     justifyContent: "center",
     gap: 20,
-    paddingTop: 50,
-  },
-  button: {
-    borderRadius: 5,
-    backgroundColor: "white",
-    width: "50%",
-    alignItems: "center",
-    zIndex: 100,
+    paddingTop: 50
   },
   closeButton: {
     position: "absolute",
-    bottom: 20,
+    bottom: 30,
     zIndex: 100,
+    backgroundColor: colours["Misty rose"]
   },
-  buttonText: {
-    color: "blue",
-  },
+  modalContainer: {
+    position: "absolute",
+    width: "100%",
+    padding: 20,
+    flex: 1,
+    backgroundColor: "transparent",
+    alignItems: "center"
+  }
 });
 
 export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
-  const [showSlideShow, setShowSlideShow] = useState(false);
+  const [startShowcase, setStartShowcase] = useState(false);
   const [loading, setLoading] = useState(true);
   const { height: screenHeight } = useWindowDimensions();
   const slideProgress = useRef(
@@ -54,14 +53,14 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
   const imageTop = slideProgress.map((value) =>
     value.interpolate({
       inputRange: [-1, 1],
-      outputRange: [screenHeight, 100],
+      outputRange: [screenHeight, 100]
     })
   );
 
   const imageRotation = rotationProgress.map((value) =>
     value.interpolate({
       inputRange: [-1, 1],
-      outputRange: ["-30deg", "30deg"],
+      outputRange: ["-30deg", "30deg"]
     })
   );
 
@@ -74,7 +73,7 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    if (!loading && showSlideShow) {
+    if (!loading && startShowcase) {
       Animated.sequence(
         slideProgress.map((progress, index) => {
           const even = index % 2 === 0;
@@ -84,13 +83,13 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
             Animated.timing(progress, {
               toValue: index === 0 ? 1 : 1 - index * (1 / images.length),
               duration: 1000,
-              useNativeDriver: false,
+              useNativeDriver: false
             }),
             Animated.timing(rotationProgress[index], {
               toValue: even ? rotateValue : -rotateValue,
               duration: 1000,
-              useNativeDriver: false,
-            }),
+              useNativeDriver: false
+            })
           ]);
         })
       ).start();
@@ -103,17 +102,17 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
         Animated.timing(progress, {
           toValue: 0,
           duration: 100,
-          useNativeDriver: false,
+          useNativeDriver: false
         })
       )
     ).start(() => {
-      setShowSlideShow(false);
+      setStartShowcase(false);
       Animated.parallel(
         slideProgress.map((progress) =>
           Animated.timing(progress, {
             toValue: -1,
             duration: 0,
-            useNativeDriver: false,
+            useNativeDriver: false
           })
         )
       ).start();
@@ -123,14 +122,9 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
   return (
     <>
       {!loading && (
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => setShowSlideShow(true)}
-        >
-          <Text style={styles.buttonText}>Start showcase</Text>
-        </TouchableHighlight>
+        <Button text="Start showcase" onPress={() => setStartShowcase(true)} />
       )}
-      <Modal visible={showSlideShow} animationType="slide">
+      <Modal visible={startShowcase} animationType="slide">
         <View style={styles.container}>
           {loading && <ActivityIndicator size="large" color="#000000" />}
 
@@ -138,17 +132,14 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
             images.map(({ url, caption, date }, index) => (
               <Animated.View
                 key={`slideshow-image-${index}`}
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  top: imageTop[index],
-                  zIndex: index,
-                  transform: [{ rotate: imageRotation[index] }],
-                  padding: 20,
-                  flex: 1,
-                  backgroundColor: "transparent",
-                  alignItems: "center",
-                }}
+                style={[
+                  styles.modalContainer,
+                  {
+                    top: imageTop[index],
+                    zIndex: index,
+                    transform: [{ rotate: imageRotation[index] }]
+                  }
+                ]}
               >
                 <PhotoFrame
                   key={url}
@@ -159,12 +150,12 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
                 />
               </Animated.View>
             ))}
-          <TouchableHighlight
-            style={styles.closeButton}
+
+          <Button
+            text="Close"
             onPress={handleOnClose}
-          >
-            <Text style={styles.buttonText}>Close</Text>
-          </TouchableHighlight>
+            containerStyle={styles.closeButton}
+          />
         </View>
       </Modal>
     </>
