@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 
 import { albums } from "./assets/albums.json";
+import { colours } from "./colours/colours";
 import { Album } from "./components/Album";
 import { Showcase } from "./components/Showcase";
 
@@ -18,21 +19,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "maroon",
+    backgroundColor: colours["Tyrian purple"],
     alignItems: "center",
     justifyContent: "center",
-    gap: 20,
-  },
-  text: {
-    color: "white",
-  },
-  button: {
-    borderRadius: 5,
-    backgroundColor: "white",
-    width: "50%",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "blue",
-  },
+    gap: 20
+  }
 });
