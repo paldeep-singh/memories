@@ -10,10 +10,13 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
-  Easing,
-  SafeAreaView
+  Easing
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  useSafeAreaInsets,
+  SafeAreaView,
+  SafeAreaProvider
+} from "react-native-safe-area-context";
 
 import { IAlbum } from "./Album";
 import { Button } from "./Button";
@@ -243,14 +246,16 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
         />
       )}
       <Modal visible={startShowcase} animationType="slide">
-        <SafeAreaView style={styles.container}>
-          <ShowcaseContent
-            images={images}
-            name={name}
-            dismiss={() => setStartShowcase(false)}
-            duration={showcaseDuration}
-          />
-        </SafeAreaView>
+        <SafeAreaProvider>
+          <SafeAreaView style={styles.container}>
+            <ShowcaseContent
+              images={images}
+              name={name}
+              dismiss={() => setStartShowcase(false)}
+              duration={showcaseDuration}
+            />
+          </SafeAreaView>
+        </SafeAreaProvider>
       </Modal>
     </>
   );
