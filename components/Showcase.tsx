@@ -99,7 +99,7 @@ const ShowcaseControls = ({
           : setShowcaseDuration(parseInt(text, 10))
       }
     />
-    <Button text="Start showcase" onPress={startShowcase} />
+    <Button text="Showcase" onPress={startShowcase} />
   </KeyboardAvoidingView>
 );
 

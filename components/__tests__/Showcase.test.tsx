@@ -61,8 +61,8 @@ describe("Showcase", () => {
         await act(() => mockPrefetchPromise);
       });
 
-      it("renders the start showcase button", () => {
-        screen.getByText("Start showcase");
+      it("renders the Showcase button", () => {
+        screen.getByText("Showcase");
       });
 
       it("renders the showcase duration input with placeholder text", () => {
@@ -71,9 +71,9 @@ describe("Showcase", () => {
         expect(input.props.placeholder).toBe("Delay (ms), default: 1000");
       });
 
-      describe("when the start showcase button is pressed", () => {
+      describe("when the Showcase button is pressed", () => {
         beforeEach(() => {
-          fireEvent.press(screen.getByText("Start showcase"));
+          fireEvent.press(screen.getByText("Showcase"));
         });
 
         it("renders the album title", () => {
@@ -95,8 +95,8 @@ describe("Showcase", () => {
             fireEvent.press(screen.getByText("Close"));
           });
 
-          it("renders the start showcase button", () => {
-            screen.getByText("Start showcase");
+          it("renders the Showcase button", () => {
+            screen.getByText("Showcase");
           });
 
           it("renders the showcase duration input", () => {
