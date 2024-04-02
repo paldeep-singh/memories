@@ -1,8 +1,11 @@
 import { faker } from "@faker-js/faker";
 import { act, fireEvent, render, screen } from "@testing-library/react-native";
 import { Image } from "expo-image";
+import mockSafeAreaContext from "react-native-safe-area-context/jest/mock";
 
 import { Showcase } from "../Showcase";
+
+jest.mock("react-native-safe-area-context", () => mockSafeAreaContext);
 
 // Required due to presence of animations
 jest.useFakeTimers();
