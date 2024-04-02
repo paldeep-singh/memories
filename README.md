@@ -79,11 +79,11 @@ A performant drop-in replacement for React Native's `Flatlist` component.
 
 Provides programattic acess to device safe-area inset information to ensure content is not blocked behind notches, status bars, etc..
 
-### Prettier
+### [Prettier](https://prettier.io/)
 
 Opinionated code formatter.
 
-### ESLint
+### [ESLint](https://eslint.org/)
 
 Static analyser to identify code quality issues.
 
