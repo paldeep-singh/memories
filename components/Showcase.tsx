@@ -13,6 +13,7 @@ import {
   Easing,
   SafeAreaView
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { IAlbum } from "./Album";
 import { Button } from "./Button";
@@ -110,6 +111,7 @@ const ShowcaseContent = ({
   dismiss,
   duration
 }: IShowcaseContent): JSX.Element => {
+  const insets = useSafeAreaInsets();
   const { height: screenHeight } = useWindowDimensions();
   const slideProgress = useRef(
     images.map(() => new Animated.Value(-1))
@@ -121,7 +123,7 @@ const ShowcaseContent = ({
   const imageTop = slideProgress.map((value) =>
     value.interpolate({
       inputRange: [-1, 1],
-      outputRange: [screenHeight, 50]
+      outputRange: [screenHeight, insets.top + styles.headerText.fontSize + 10]
     })
   );
 
