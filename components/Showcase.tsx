@@ -121,7 +121,7 @@ const ShowcaseContent = ({
   const imageTop = slideProgress.map((value) =>
     value.interpolate({
       inputRange: [-1, 1],
-      outputRange: [screenHeight, 100]
+      outputRange: [screenHeight, 50]
     })
   );
 
