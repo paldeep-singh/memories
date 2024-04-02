@@ -233,7 +233,7 @@ export const Showcase = ({ images, name }: IAlbum): JSX.Element => {
     Promise.all(images.map(({ url }) => Image.prefetch(url))).then(() => {
       setLoading(false);
     });
-  }, []);
+  }, []); //Only prefetch images on first render
 
   return (
     <>

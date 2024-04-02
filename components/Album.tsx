@@ -37,6 +37,7 @@ export const Album = ({ name, images }: IAlbum): JSX.Element => {
         data={[name, ...images]}
         renderItem={({ item }) => {
           if (typeof item === "string") {
+            // First item is the album name so it can be used as a sticky header
             return <Text style={styles.title}>{item}</Text>;
           }
           return (
@@ -52,7 +53,7 @@ export const Album = ({ name, images }: IAlbum): JSX.Element => {
         }}
         estimatedItemSize={70}
         testID="album-list"
-        stickyHeaderIndices={[0]}
+        stickyHeaderIndices={[0]} // First item is the album name
       />
     </View>
   );

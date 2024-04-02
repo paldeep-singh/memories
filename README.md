@@ -6,6 +6,8 @@ Demo:
 
 https://github.com/paldeep-singh/memories/assets/48742122/32efda1f-05c6-4320-85ca-87d65949b855
 
+The root of the app is in `App.tsx`, which imports the image links from `assets/albums.json` (the json file I was provided).
+
 ## Running the app
 
 The app can be run in a simulator or on an actual Android or iOS device using the [Expo Go app](https://expo.dev/go).

@@ -69,7 +69,6 @@ export const PhotoFrame = ({
   height
 }: IPhoto): JSX.Element => {
   const [loading, setLoading] = useState(true);
-
   const [dimensions, setDimensions] = useState(styles.imageLoading);
   const [error, setError] = useState(false);
 
@@ -119,6 +118,7 @@ export const PhotoFrame = ({
           />
         </View>
       )}
+
       {error && (
         <View style={styles.error}>
           <Text style={styles.errorText}>Error: Image could not be loaded</Text>
