@@ -1,0 +1,64 @@
+{
+  "albums": [
+    {
+      "name": "Skiing 2021",
+      "images": [
+        {
+          "date": "2021-01-01",
+          "url": "https://localhost:3930/image.jpg",
+          "caption": "Error image"
+        },
+        {
+          "date": "2021-01-03",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/2+012.jpg",
+          "caption": "Somewhere in Canada 1"
+        },
+        {
+          "date": "2021-01-04",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/2+013.jpg",
+          "caption": "Somewhere in Canada 2"
+        },
+        {
+          "date": "2021-01-05",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/EarlyCloudLake4.jpg",
+          "caption": "Somewhere in Canada 3"
+        },
+        {
+          "date": "2021-01-06",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/Imagen+011.jpg",
+          "caption": "Somewhere in Canada 4"
+        },
+        {
+          "date": "2021-01-07",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/Imagen+016.jpg",
+          "caption": "Somewhere in Canada 5"
+        },
+        {
+          "date": "2021-01-08",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/PerfectDay.jpg",
+          "caption": "Somewhere in Canada 6"
+        },
+        {
+          "date": "2021-01-09",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/RangeView1.jpg",
+          "caption": "Somewhere in Canada 7"
+        },
+        {
+          "date": "2021-01-10",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/RangeView3.jpg",
+          "caption": "Somewhere in Canada 8"
+        },
+        {
+          "date": "2021-01-11",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/RangeView4.jpg",
+          "caption": "Somewhere in Canada 9"
+        },
+        {
+          "date": "2021-01-12",
+          "url": "https://memwa-web-staging.s3.ap-southeast-2.amazonaws.com/images/SilverStarEarly3.jpg",
+          "caption": "Somewhere in Canada 10  "
+        }
+      ]
+    }
+  ]
+}
