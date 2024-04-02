@@ -68,7 +68,10 @@ const styles = StyleSheet.create({
 const LoadingIndicator = (): JSX.Element => (
   <View style={styles.loadingContainer}>
     <Text style={styles.loadingText}>Showcase loading...</Text>
-    <ActivityIndicator color={colours["Misty rose"]} />
+    <ActivityIndicator
+      testID="loading-indicator"
+      color={colours["Misty rose"]}
+    />
   </View>
 );
 
@@ -81,6 +84,7 @@ const ShowcaseControls = ({
 }): JSX.Element => (
   <KeyboardAvoidingView style={styles.modalButtonContainer} behavior="padding">
     <TextInput
+      testID="duration-input"
       inputMode="numeric"
       placeholder="Delay (ms), default: 1000"
       placeholderTextColor={colours["Payne's grey"]}
@@ -202,6 +206,7 @@ const ShowcaseContent = ({
             caption={caption}
             date={date}
             width="80%"
+            testID={`showcase-image-${index}`}
           />
         </Animated.View>
       ))}
