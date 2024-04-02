@@ -1,4 +1,4 @@
-import {faker} from '@faker-js/faker'
+import { faker } from "@faker-js/faker";
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import { Dimensions } from "react-native";
 
@@ -8,7 +8,7 @@ const mockPhotoFrameProps: IPhoto = {
   date: "2021-01-03",
   url: faker.image.url(),
   caption: "Somewhere in Canada 2",
-  testID: "test-photo-frame",
+  testID: "test-photo-frame"
 };
 
 const COMPONENT_TEST_ID = "test-photo-frame";
@@ -52,9 +52,9 @@ describe("PhotoFrame", () => {
         nativeEvent: {
           source: {
             width: 200,
-            height: 100,
-          },
-        },
+            height: 100
+          }
+        }
       });
     });
 
@@ -82,7 +82,7 @@ describe("PhotoFrame", () => {
       expect(image.props.style).toEqual({
         aspectRatio: 2,
         height: undefined,
-        width: "90%",
+        width: "90%"
       });
     });
   });
