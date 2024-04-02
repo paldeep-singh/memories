@@ -22,9 +22,10 @@ Once the prerequisites are installed, clone the repository and run `npm install`
 
 #### Running on a physical device using Expo Go:
 
-1. Install the Expo Go app on your device ([iOS](https://apps.apple.com/us/app/expo-go/id982107779), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&pli=1))
-2. `npm run start`
-3. Scan the QR code that appears in the terminal using your device's camera.
+1. Ensure your computer and mobile device are connected to the same Wi-Fi network.
+2. Install the Expo Go app on your device ([iOS](https://apps.apple.com/us/app/expo-go/id982107779), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&pli=1))
+3. `npm run start`
+4. Scan the QR code that appears in the terminal using your device's camera.
 
 #### Running in a simulator
 
