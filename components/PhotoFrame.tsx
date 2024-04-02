@@ -33,6 +33,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50
   },
+  imageError: {
+    width: 10,
+    height: 10
+  },
   loading: {
     position: "absolute",
     top: 0,
@@ -41,6 +45,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: "center",
     alignItems: "center"
+  },
+  error: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  errorText: {
+    color: colours.Poppy
   }
 });
 
@@ -55,6 +71,7 @@ export const PhotoFrame = ({
   const [loading, setLoading] = useState(true);
 
   const [dimensions, setDimensions] = useState(styles.imageLoading);
+  const [error, setError] = useState(false);
 
   return (
     <View
@@ -79,8 +96,13 @@ export const PhotoFrame = ({
           setDimensions({ width, height });
           setLoading(false);
         }}
+        onError={() => {
+          setError(true);
+          setLoading(false);
+        }}
         contentFit="contain"
       />
+
       {!loading && (
         <Text style={styles.text}>
           {date}: {caption}
@@ -94,6 +116,11 @@ export const PhotoFrame = ({
             testID={`${testID}-loading`}
             color={colours["Charcoal"]}
           />
+        </View>
+      )}
+      {error && (
+        <View style={styles.error}>
+          <Text style={styles.errorText}>Error: Image could not be loaded</Text>
         </View>
       )}
     </View>

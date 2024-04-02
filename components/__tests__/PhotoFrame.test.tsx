@@ -65,11 +65,9 @@ describe("PhotoFrame", () => {
     });
 
     it("renders the date and caption", () => {
-      expect(
-        screen.getByText(
-          `${mockPhotoFrameProps.date}: ${mockPhotoFrameProps.caption}`
-        )
-      ).toBeTruthy();
+      screen.getByText(
+        `${mockPhotoFrameProps.date}: ${mockPhotoFrameProps.caption}`
+      );
     });
 
     it("does not render the loading indicator", () => {
@@ -84,6 +82,32 @@ describe("PhotoFrame", () => {
         height: undefined,
         width: "90%"
       });
+    });
+  });
+
+  describe("if there is an error while loading the image", () => {
+    beforeEach(() => {
+      render(<PhotoFrame {...mockPhotoFrameProps} />);
+
+      fireEvent(screen.getByTestId(IMAGE_TEST_ID), "onError", {
+        nativeEvent: {
+          error: "Image could not be loaded"
+        }
+      });
+    });
+
+    it("renders the error text", () => {
+      screen.getByText("Error: Image could not be loaded");
+    });
+
+    it("renders the date and caption", () => {
+      screen.getByText(
+        `${mockPhotoFrameProps.date}: ${mockPhotoFrameProps.caption}`
+      );
+    });
+
+    it("does not render the loading indicator", () => {
+      expect(screen.queryByTestId(LOADING_TEST_ID)).toBeNull();
     });
   });
 });
