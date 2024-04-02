@@ -2,6 +2,12 @@
 
 Memories is an app that lets you collect your photos and showcase them as specific events or moments in your past. For example, you went on a skiing trip to Canada and took a bunch of photos. You’d like to use some or all of those photos to share with others but in a beautifully curated manner. The memories app lets you create a showcase for your photos.
 
+Demo:
+
+https://github.com/paldeep-singh/memories/assets/48742122/32efda1f-05c6-4320-85ca-87d65949b855
+
+
+
 ## Running the app
 
 The app can be run in a simulator or on an actual Android or iOS device using the [Expo Go app](https://expo.dev/go).
