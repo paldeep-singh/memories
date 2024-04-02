@@ -95,6 +95,7 @@ export const PhotoFrame = ({
         onLoad={({ source: { width, height } }) => {
           setDimensions({ width, height });
           setLoading(false);
+          setError(false); // to ensure error text is not displayed on reload
         }}
         onError={() => {
           setError(true);
