@@ -6,8 +6,6 @@ Demo:
 
 https://github.com/paldeep-singh/memories/assets/48742122/32efda1f-05c6-4320-85ca-87d65949b855
 
-
-
 ## Running the app
 
 The app can be run in a simulator or on an actual Android or iOS device using the [Expo Go app](https://expo.dev/go).
@@ -24,10 +22,12 @@ Once the prerequisites are installed, clone the repository and run `npm install`
 
 1. Ensure your computer and mobile device are connected to the same Wi-Fi network.
 2. Install the Expo Go app on your device ([iOS](https://apps.apple.com/us/app/expo-go/id982107779), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&pli=1))
-3. `npm run start`
+3. Run `npm run start`
 4. Scan the QR code that appears in the terminal using your device's camera.
 
 #### Running in a simulator
+
+Use the following commands:
 
 - iOS: `npm run ios`
 - Android: `npm run android`
@@ -36,7 +36,7 @@ Once the prerequisites are installed, clone the repository and run `npm install`
 
 Tests can be run using `npm run test`.
 
-Tests are written using [jest](https://jestjs.io/)(specifically the [jest-expo](https://www.npmjs.com/package/jest-expo) preset) and [React Native Testing Library](https://callstack.github.io/react-native-testing-library/). [Faker.js](https://fakerjs.dev/) is used to generate fake realistic data for tests.
+Tests are written using [jest](https://jestjs.io/) (specifically, the [jest-expo](https://www.npmjs.com/package/jest-expo) preset) and [React Native Testing Library](https://callstack.github.io/react-native-testing-library/). [Faker.js](https://fakerjs.dev/) is used to generate fake realistic data for tests.
 
 ## Components
 
@@ -44,11 +44,11 @@ Code for components can be found in the `components` folder. Their corresponding
 
 ### PhotoFrame
 
-A component for displaying images in a polaroid-style frame. Uses Expo Image.
+A component for displaying images in a polaroid-style frame. Uses `Expo Image`.
 
 ### Album
 
-A component for displaying a scrollable list of PhotoFrames. Uses FlashList.
+A component for displaying a scrollable list of PhotoFrames. Uses `FlashList`.
 
 ### Showcase
 
